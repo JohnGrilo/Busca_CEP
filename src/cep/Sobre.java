@@ -1,14 +1,19 @@
 package cep;
 
-import java.awt.EventQueue;
-
-import javax.swing.JDialog;
-import java.awt.Toolkit;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.net.URI;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Sobre extends JDialog {
 
@@ -53,11 +58,22 @@ public class Sobre extends JDialog {
 		getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblWebService = new JLabel("republicavirtual.com.br");
+		lblWebService.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				link("https://www.republicavirtual.com.br/");
+			}
+		});
 		lblWebService.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblWebService.setBounds(126, 111, 132, 14);
 		getContentPane().add(lblWebService);
 		
 		JButton btnGithub = new JButton("");
+		btnGithub.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				link("https://github.com/JohnGrilo/Busca_CEP");
+			}
+		});
 		btnGithub.setFocusPainted(false);
 		btnGithub.setDefaultCapable(false);
 		btnGithub.setBorderPainted(false);
@@ -73,6 +89,11 @@ public class Sobre extends JDialog {
 	
 	private void link(String site) {
 		Desktop desktop = Desktop.getDesktop();
-		
+		try {
+			URI uri = new URI(site);
+			desktop.browse(uri);
+		} catch (Exception e) {
+			System.out.println(e);;
+		}
 	}
 }
