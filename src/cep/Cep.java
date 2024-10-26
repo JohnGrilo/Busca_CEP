@@ -135,11 +135,18 @@ public class Cep extends JFrame {
 				} else {
 					buscarCep();
 				}
+				
 			}
 		});
 		btnCep.setBackground(SystemColor.info);
 		btnCep.setBounds(183, 29, 85, 23);
 		contentPane.add(btnCep);
+		
+	    txtCep.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            btnCep.doClick(); // Executa o clique do botão buscar
+	        }
+	    });
 
 		JButton btnSobre = new JButton("");
 		btnSobre.addActionListener(new ActionListener() {
